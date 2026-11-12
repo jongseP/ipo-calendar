@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-12T22:45:36+09:00",
+ "updated": "2026-11-13T02:35:30+09:00",
  "ipos": {
   "2355": {
    "no": 2355,
@@ -21,6 +21,7 @@
    "inst_rate": null,
    "lockup_pct": null,
    "retail_rate": null,
+   "float_pct": null,
    "status": "active",
    "changes": []
   },
@@ -44,6 +45,7 @@
    "inst_rate": null,
    "lockup_pct": null,
    "retail_rate": null,
+   "float_pct": null,
    "status": "active",
    "changes": []
   },
@@ -67,6 +69,7 @@
    "inst_rate": null,
    "lockup_pct": null,
    "retail_rate": null,
+   "float_pct": null,
    "status": "active",
    "changes": []
   },
@@ -91,6 +94,7 @@
    "inst_rate": null,
    "lockup_pct": null,
    "retail_rate": null,
+   "float_pct": null,
    "status": "active",
    "changes": []
   },
@@ -114,6 +118,7 @@
    "inst_rate": null,
    "lockup_pct": null,
    "retail_rate": null,
+   "float_pct": 38.88,
    "status": "active",
    "changes": []
   },
@@ -138,6 +143,7 @@
    "inst_rate": null,
    "lockup_pct": null,
    "retail_rate": null,
+   "float_pct": null,
    "status": "active",
    "changes": []
   },
@@ -161,6 +167,7 @@
    "inst_rate": null,
    "lockup_pct": null,
    "retail_rate": null,
+   "float_pct": null,
    "status": "active",
    "changes": []
   },
@@ -184,6 +191,7 @@
    "inst_rate": null,
    "lockup_pct": null,
    "retail_rate": null,
+   "float_pct": null,
    "status": "active",
    "changes": []
   },
@@ -207,6 +215,7 @@
    "inst_rate": null,
    "lockup_pct": null,
    "retail_rate": null,
+   "float_pct": null,
    "status": "active",
    "changes": []
   },
@@ -230,6 +239,7 @@
    "inst_rate": null,
    "lockup_pct": null,
    "retail_rate": null,
+   "float_pct": null,
    "status": "active",
    "changes": []
   },
@@ -253,6 +263,7 @@
    "inst_rate": null,
    "lockup_pct": null,
    "retail_rate": null,
+   "float_pct": 29.07,
    "status": "active",
    "changes": []
   },
@@ -276,6 +287,7 @@
    "inst_rate": null,
    "lockup_pct": null,
    "retail_rate": null,
+   "float_pct": null,
    "status": "active",
    "changes": []
   },
@@ -299,6 +311,7 @@
    "inst_rate": null,
    "lockup_pct": null,
    "retail_rate": null,
+   "float_pct": null,
    "status": "active",
    "changes": []
   },
@@ -323,6 +336,7 @@
    "inst_rate": null,
    "lockup_pct": null,
    "retail_rate": null,
+   "float_pct": null,
    "status": "active",
    "changes": []
   },
@@ -348,6 +362,7 @@
    "inst_rate": null,
    "lockup_pct": null,
    "retail_rate": null,
+   "float_pct": null,
    "status": "active",
    "changes": []
   },
@@ -372,6 +387,7 @@
    "inst_rate": null,
    "lockup_pct": null,
    "retail_rate": null,
+   "float_pct": 36.81,
    "status": "active",
    "changes": []
   },
@@ -395,6 +411,7 @@
    "inst_rate": null,
    "lockup_pct": null,
    "retail_rate": null,
+   "float_pct": 34.01,
    "status": "active",
    "changes": []
   },
@@ -418,6 +435,7 @@
    "inst_rate": 1051.38,
    "lockup_pct": 4.16,
    "retail_rate": 1851.14,
+   "float_pct": null,
    "status": "active",
    "changes": []
   },
@@ -441,6 +459,7 @@
    "inst_rate": 871.74,
    "lockup_pct": 1.13,
    "retail_rate": 834.73,
+   "float_pct": 35.01,
    "status": "active",
    "changes": []
   },
@@ -464,6 +483,7 @@
    "inst_rate": 1201.81,
    "lockup_pct": 5.62,
    "retail_rate": 1343.32,
+   "float_pct": null,
    "status": "active",
    "changes": []
   },
@@ -487,6 +507,7 @@
    "inst_rate": 1163.35,
    "lockup_pct": 7.21,
    "retail_rate": 1342.66,
+   "float_pct": 34.86,
    "status": "active",
    "changes": []
   },
@@ -510,6 +531,7 @@
    "inst_rate": 66.58,
    "lockup_pct": 0.06,
    "retail_rate": 13.26,
+   "float_pct": null,
    "status": "active",
    "changes": []
   },
@@ -533,6 +555,7 @@
    "inst_rate": 152.36,
    "lockup_pct": 0.03,
    "retail_rate": 19.27,
+   "float_pct": 30.38,
    "status": "active",
    "changes": []
   },
@@ -556,6 +579,7 @@
    "inst_rate": 840.86,
    "lockup_pct": 16.61,
    "retail_rate": 1219.37,
+   "float_pct": 29.47,
    "status": "active",
    "changes": []
   },
@@ -579,6 +603,7 @@
    "inst_rate": 1266.52,
    "lockup_pct": 0.0,
    "retail_rate": 1112.73,
+   "float_pct": null,
    "status": "active",
    "changes": []
   },
@@ -602,6 +627,7 @@
    "inst_rate": 284.53,
    "lockup_pct": 2.09,
    "retail_rate": 3.55,
+   "float_pct": null,
    "status": "active",
    "changes": []
   },
@@ -625,6 +651,7 @@
    "inst_rate": 630.1,
    "lockup_pct": 0.24,
    "retail_rate": 28.95,
+   "float_pct": null,
    "status": "active",
    "changes": []
   },
@@ -648,6 +675,7 @@
    "inst_rate": 1000.07,
    "lockup_pct": 0.87,
    "retail_rate": 684.73,
+   "float_pct": 31.75,
    "status": "active",
    "changes": []
   },
@@ -671,6 +699,7 @@
    "inst_rate": 1234.3,
    "lockup_pct": 6.14,
    "retail_rate": 1410.87,
+   "float_pct": 23.95,
    "status": "active",
    "changes": []
   },
@@ -694,6 +723,7 @@
    "inst_rate": 1041.02,
    "lockup_pct": 29.52,
    "retail_rate": 1253.39,
+   "float_pct": 31.29,
    "status": "active",
    "changes": []
   }
