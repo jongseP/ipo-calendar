@@ -112,6 +112,8 @@
   .fields label:focus-within { border-color:var(--accent); }
   .fields input { display:block; width:100%; border:0; padding:2px 0 0; font:inherit; font-size:17px; font-weight:700; color:var(--text);
     background:none; outline:none; caret-color:var(--accent); }
+  .fields .num { display:flex; align-items:center; gap:6px; }
+  #dSign { flex:0 0 auto; min-width:36px; min-height:32px; border:0; border-radius:8px; background:var(--chip); color:var(--text); font-size:17px; font-weight:700; }
   .fields input::placeholder { color:var(--sub); font-weight:500; }
   .actions { display:flex; gap:8px; margin-top:18px; }
   .actions button { flex:1; min-height:50px; border-radius:14px; border:0; font-size:16px; font-weight:700; }
@@ -165,7 +167,7 @@
     <div class="states" id="dStates" role="group" aria-label="내 상태"></div>
     <div class="fields">
       <label>배정 수량(주)<input type="number" id="dShares" inputmode="numeric" step="1" min="0" placeholder="0"></label>
-      <label>매도 수익(원)<input type="number" id="dProfit" inputmode="numeric" step="1" placeholder="0"></label>
+      <label>매도 수익(원)<span class="num"><input type="number" id="dProfit" inputmode="numeric" step="1" placeholder="0"><button type="button" id="dSign" aria-label="손실로 바꾸기(부호 반대)">±</button></span></label>
     </div>
     <div class="actions">
       <button class="ghost" id="dClear">기록 지우기</button>
@@ -373,6 +375,13 @@ for (const [id, field] of [["dShares", "shares"], ["dProfit", "profit"]]) {
     update({[field]: n});
   };
 }
+// 아이폰 숫자 키패드엔 '-'가 없어 손실은 이 버튼으로 부호를 바꾼다
+$("dSign").onclick = () => {
+  const n = Number($("dProfit").value);
+  if ($("dProfit").value === "" || !n) return;
+  $("dProfit").value = -n;
+  $("dProfit").onchange();
+};
 $("dClose").onclick = () => $("sheet").close();
 $("dClear").onclick = () => { delete records[current.no]; saveRecords(); render(); openSheet(current); };
 $("sheet").addEventListener("click", e => { if (e.target === $("sheet")) $("sheet").close(); });
