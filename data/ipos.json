@@ -1,0 +1,611 @@
+{
+ "updated": "2026-11-12T21:23:05+09:00",
+ "ipos": {
+  "2355": {
+   "no": 2355,
+   "name": "KTE",
+   "sub_start": "2026-12-14",
+   "sub_end": "2026-12-15",
+   "listing": null,
+   "price_final": null,
+   "price_band": [
+    19000,
+    23000
+   ],
+   "brokers": [
+    "NH투자증권"
+   ],
+   "min_shares": null,
+   "margin_rate": 0.5,
+   "progress": "공모주",
+   "status": "active",
+   "changes": []
+  },
+  "2356": {
+   "no": 2356,
+   "name": "데스틴파워",
+   "sub_start": "2026-12-14",
+   "sub_end": "2026-12-15",
+   "listing": null,
+   "price_final": null,
+   "price_band": [
+    8000,
+    11000
+   ],
+   "brokers": [
+    "한국투자증권"
+   ],
+   "min_shares": null,
+   "margin_rate": 0.5,
+   "progress": "공모주",
+   "status": "active",
+   "changes": []
+  },
+  "2348": {
+   "no": 2348,
+   "name": "씨아이에스케미칼",
+   "sub_start": "2026-12-10",
+   "sub_end": "2026-12-11",
+   "listing": null,
+   "price_final": null,
+   "price_band": [
+    5400,
+    6800
+   ],
+   "brokers": [
+    "KB증권"
+   ],
+   "min_shares": null,
+   "margin_rate": 0.5,
+   "progress": "공모주",
+   "status": "active",
+   "changes": []
+  },
+  "2353": {
+   "no": 2353,
+   "name": "인터엑스",
+   "sub_start": "2026-12-09",
+   "sub_end": "2026-12-10",
+   "listing": null,
+   "price_final": null,
+   "price_band": [
+    10000,
+    13000
+   ],
+   "brokers": [
+    "한국투자증권",
+    "BNK투자증권"
+   ],
+   "min_shares": null,
+   "margin_rate": 0.5,
+   "progress": "공모주",
+   "status": "active",
+   "changes": []
+  },
+  "2358": {
+   "no": 2358,
+   "name": "다비오",
+   "sub_start": "2026-12-09",
+   "sub_end": "2026-12-10",
+   "listing": null,
+   "price_final": null,
+   "price_band": [
+    12300,
+    16600
+   ],
+   "brokers": [
+    "대신증권"
+   ],
+   "min_shares": null,
+   "margin_rate": 0.5,
+   "progress": "공모주",
+   "status": "active",
+   "changes": []
+  },
+  "2359": {
+   "no": 2359,
+   "name": "마더스제약",
+   "sub_start": "2026-12-08",
+   "sub_end": "2026-12-09",
+   "listing": null,
+   "price_final": null,
+   "price_band": [
+    11000,
+    14500
+   ],
+   "brokers": [
+    "KB증권",
+    "NH투자증권"
+   ],
+   "min_shares": null,
+   "margin_rate": 0.5,
+   "progress": "공모주",
+   "status": "active",
+   "changes": []
+  },
+  "2351": {
+   "no": 2351,
+   "name": "이노보테라퓨틱스",
+   "sub_start": "2026-12-07",
+   "sub_end": "2026-12-08",
+   "listing": null,
+   "price_final": null,
+   "price_band": [
+    20000,
+    24000
+   ],
+   "brokers": [
+    "한국투자증권"
+   ],
+   "min_shares": null,
+   "margin_rate": 0.5,
+   "progress": "공모주",
+   "status": "active",
+   "changes": []
+  },
+  "2354": {
+   "no": 2354,
+   "name": "우리투자스팩1호",
+   "sub_start": "2026-12-02",
+   "sub_end": "2026-12-03",
+   "listing": null,
+   "price_final": null,
+   "price_band": [
+    2000,
+    2000
+   ],
+   "brokers": [
+    "우리투자증권"
+   ],
+   "min_shares": null,
+   "margin_rate": 1.0,
+   "progress": "공모주",
+   "status": "active",
+   "changes": []
+  },
+  "2343": {
+   "no": 2343,
+   "name": "엔키화이트햇",
+   "sub_start": "2026-12-01",
+   "sub_end": "2026-12-02",
+   "listing": null,
+   "price_final": null,
+   "price_band": [
+    13000,
+    16500
+   ],
+   "brokers": [
+    "신영증권"
+   ],
+   "min_shares": null,
+   "margin_rate": 0.5,
+   "progress": "공모주",
+   "status": "active",
+   "changes": []
+  },
+  "2350": {
+   "no": 2350,
+   "name": "에이엔에이치스트럭쳐",
+   "sub_start": "2026-11-27",
+   "sub_end": "2026-11-30",
+   "listing": null,
+   "price_final": null,
+   "price_band": [
+    11200,
+    13600
+   ],
+   "brokers": [
+    "NH투자증권"
+   ],
+   "min_shares": null,
+   "margin_rate": 0.5,
+   "progress": "공모주",
+   "status": "active",
+   "changes": []
+  },
+  "2341": {
+   "no": 2341,
+   "name": "제논",
+   "sub_start": "2026-11-24",
+   "sub_end": "2026-11-25",
+   "listing": null,
+   "price_final": null,
+   "price_band": [
+    9700,
+    12200
+   ],
+   "brokers": [
+    "삼성증권"
+   ],
+   "min_shares": null,
+   "margin_rate": 0.5,
+   "progress": "공모주",
+   "status": "active",
+   "changes": []
+  },
+  "2340": {
+   "no": 2340,
+   "name": "케이엠에프",
+   "sub_start": "2026-11-24",
+   "sub_end": "2026-11-25",
+   "listing": null,
+   "price_final": null,
+   "price_band": [
+    15000,
+    17800
+   ],
+   "brokers": [
+    "IBK투자증권"
+   ],
+   "min_shares": null,
+   "margin_rate": 0.5,
+   "progress": "공모주",
+   "status": "active",
+   "changes": []
+  },
+  "2357": {
+   "no": 2357,
+   "name": "신영스팩12호",
+   "sub_start": "2026-11-24",
+   "sub_end": "2026-11-25",
+   "listing": null,
+   "price_final": null,
+   "price_band": [
+    2000,
+    2000
+   ],
+   "brokers": [
+    "신영증권"
+   ],
+   "min_shares": null,
+   "margin_rate": 1.0,
+   "progress": "공모주",
+   "status": "active",
+   "changes": []
+  },
+  "2345": {
+   "no": 2345,
+   "name": "아델",
+   "sub_start": "2026-11-23",
+   "sub_end": "2026-11-24",
+   "listing": "2026-12-02",
+   "price_final": null,
+   "price_band": [
+    18000,
+    25000
+   ],
+   "brokers": [
+    "삼성증권",
+    "미래에셋증권"
+   ],
+   "min_shares": null,
+   "margin_rate": 0.5,
+   "progress": "공모주",
+   "status": "active",
+   "changes": []
+  },
+  "2349": {
+   "no": 2349,
+   "name": "에스에프씨",
+   "sub_start": "2026-11-18",
+   "sub_end": "2026-11-19",
+   "listing": "2026-11-27",
+   "price_final": null,
+   "price_band": [
+    31600,
+    36100
+   ],
+   "brokers": [
+    "미래에셋증권",
+    "한국투자증권",
+    "삼성증권"
+   ],
+   "min_shares": null,
+   "margin_rate": 0.5,
+   "progress": "공모주",
+   "status": "active",
+   "changes": []
+  },
+  "2352": {
+   "no": 2352,
+   "name": "유캐스트",
+   "sub_start": "2026-11-18",
+   "sub_end": "2026-11-19",
+   "listing": "2026-11-30",
+   "price_final": null,
+   "price_band": [
+    19000,
+    23000
+   ],
+   "brokers": [
+    "유진투자증권",
+    "신영증권"
+   ],
+   "min_shares": null,
+   "margin_rate": 0.5,
+   "progress": "공모주",
+   "status": "active",
+   "changes": []
+  },
+  "2321": {
+   "no": 2321,
+   "name": "엠비디",
+   "sub_start": "2026-11-12",
+   "sub_end": "2026-11-13",
+   "listing": "2026-11-24",
+   "price_final": 7000,
+   "price_band": [
+    9600,
+    11700
+   ],
+   "brokers": [
+    "하나증권"
+   ],
+   "min_shares": null,
+   "margin_rate": 0.5,
+   "progress": "공모주",
+   "status": "active",
+   "changes": []
+  },
+  "2334": {
+   "no": 2334,
+   "name": "하나에어로다이내믹스",
+   "sub_start": "2026-11-10",
+   "sub_end": "2026-11-11",
+   "listing": "2026-11-20",
+   "price_final": 5700,
+   "price_band": [
+    4700,
+    5700
+   ],
+   "brokers": [
+    "IBK투자증권"
+   ],
+   "min_shares": null,
+   "margin_rate": 0.5,
+   "progress": "공모주",
+   "status": "active",
+   "changes": []
+  },
+  "2331": {
+   "no": 2331,
+   "name": "에이엘로봇",
+   "sub_start": "2026-11-06",
+   "sub_end": "2026-11-09",
+   "listing": "2026-11-18",
+   "price_final": 17600,
+   "price_band": [
+    15700,
+    17600
+   ],
+   "brokers": [
+    "대신증권"
+   ],
+   "min_shares": null,
+   "margin_rate": 0.5,
+   "progress": "공모주",
+   "status": "active",
+   "changes": []
+  },
+  "2338": {
+   "no": 2338,
+   "name": "옵토닉스",
+   "sub_start": "2026-11-05",
+   "sub_end": "2026-11-06",
+   "listing": "2026-11-17",
+   "price_final": 12000,
+   "price_band": [
+    10000,
+    12000
+   ],
+   "brokers": [
+    "한국투자증권"
+   ],
+   "min_shares": null,
+   "margin_rate": 0.5,
+   "progress": "공모주",
+   "status": "active",
+   "changes": []
+  },
+  "2342": {
+   "no": 2342,
+   "name": "영광와이케이엠씨",
+   "sub_start": "2026-11-04",
+   "sub_end": "2026-11-05",
+   "listing": "2026-11-16",
+   "price_final": 11000,
+   "price_band": [
+    9400,
+    11000
+   ],
+   "brokers": [
+    "대신증권"
+   ],
+   "min_shares": null,
+   "margin_rate": 0.5,
+   "progress": "공모주",
+   "status": "active",
+   "changes": []
+  },
+  "2336": {
+   "no": 2336,
+   "name": "넥스아이",
+   "sub_start": "2026-11-03",
+   "sub_end": "2026-11-04",
+   "listing": "2026-11-12",
+   "price_final": 8000,
+   "price_band": [
+    10500,
+    13000
+   ],
+   "brokers": [
+    "한국투자증권"
+   ],
+   "min_shares": null,
+   "margin_rate": 0.5,
+   "progress": "신규상장",
+   "status": "active",
+   "changes": []
+  },
+  "2325": {
+   "no": 2325,
+   "name": "바로팜",
+   "sub_start": "2026-11-02",
+   "sub_end": "2026-11-03",
+   "listing": "2026-11-11",
+   "price_final": 16400,
+   "price_band": [
+    16400,
+    20200
+   ],
+   "brokers": [
+    "미래에셋증권"
+   ],
+   "min_shares": null,
+   "margin_rate": 0.5,
+   "progress": "신규상장",
+   "status": "active",
+   "changes": []
+  },
+  "2339": {
+   "no": 2339,
+   "name": "동원파츠",
+   "sub_start": "2026-11-02",
+   "sub_end": "2026-11-03",
+   "listing": "2026-11-10",
+   "price_final": 26500,
+   "price_band": [
+    23000,
+    26500
+   ],
+   "brokers": [
+    "삼성증권"
+   ],
+   "min_shares": null,
+   "margin_rate": 0.5,
+   "progress": "신규상장",
+   "status": "active",
+   "changes": []
+  },
+  "2329": {
+   "no": 2329,
+   "name": "아이엠스팩1호",
+   "sub_start": "2026-10-26",
+   "sub_end": "2026-10-27",
+   "listing": "2026-11-04",
+   "price_final": 2000,
+   "price_band": [
+    2000,
+    2000
+   ],
+   "brokers": [
+    "아이엠증권"
+   ],
+   "min_shares": null,
+   "margin_rate": 1.0,
+   "progress": "신규상장",
+   "status": "active",
+   "changes": []
+  },
+  "2335": {
+   "no": 2335,
+   "name": "래블업",
+   "sub_start": "2026-10-22",
+   "sub_end": "2026-10-23",
+   "listing": "2026-11-03",
+   "price_final": 19000,
+   "price_band": [
+    19000,
+    22000
+   ],
+   "brokers": [
+    "NH투자증권"
+   ],
+   "min_shares": null,
+   "margin_rate": 0.5,
+   "progress": "신규상장",
+   "status": "active",
+   "changes": []
+  },
+  "2332": {
+   "no": 2332,
+   "name": "이에스티",
+   "sub_start": "2026-10-22",
+   "sub_end": "2026-10-23",
+   "listing": "2026-11-04",
+   "price_final": 12400,
+   "price_band": [
+    10600,
+    12400
+   ],
+   "brokers": [
+    "대신증권"
+   ],
+   "min_shares": null,
+   "margin_rate": 0.5,
+   "progress": "신규상장",
+   "status": "active",
+   "changes": []
+  },
+  "2333": {
+   "no": 2333,
+   "name": "영광(구.영광공작소)",
+   "sub_start": "2026-10-22",
+   "sub_end": "2026-10-23",
+   "listing": "2026-11-02",
+   "price_final": 17000,
+   "price_band": [
+    14000,
+    17000
+   ],
+   "brokers": [
+    "한국투자증권"
+   ],
+   "min_shares": null,
+   "margin_rate": 0.5,
+   "progress": "신규상장",
+   "status": "active",
+   "changes": []
+  },
+  "2328": {
+   "no": 2328,
+   "name": "인텔리빅스",
+   "sub_start": "2026-10-21",
+   "sub_end": "2026-10-22",
+   "listing": "2026-10-30",
+   "price_final": 9000,
+   "price_band": [
+    7600,
+    9000
+   ],
+   "brokers": [
+    "미래에셋증권"
+   ],
+   "min_shares": null,
+   "margin_rate": 0.5,
+   "progress": "신규상장",
+   "status": "active",
+   "changes": []
+  },
+  "2322": {
+   "no": 2322,
+   "name": "티앤이코리아",
+   "sub_start": "2026-10-20",
+   "sub_end": "2026-10-21",
+   "listing": "2026-10-29",
+   "price_final": 15300,
+   "price_band": [
+    12600,
+    15300
+   ],
+   "brokers": [
+    "신한투자증권"
+   ],
+   "min_shares": null,
+   "margin_rate": 0.5,
+   "progress": "신규상장",
+   "status": "active",
+   "changes": []
+  }
+ }
+}

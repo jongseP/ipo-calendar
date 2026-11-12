@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>공모주 달력</title>
+<meta name="theme-color" content="#ffffff">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+  :root {
+    --accent:#3182f6; --ink:#1b64da; --accent-soft:#eef5ff; --accent-line:#d6e7ff;
+    --text:#191f28; --body:#333d4b; --sub:#5f6b78; --faint:#c4cad1;
+    --chip:#f4f6f8; --line:#eef0f3;
+    --list:#8a6100; --list-soft:#fff8e6;
+    --warn:#c2381a; --warn-soft:#fff1ec;
+  }
+  * { box-sizing:border-box; }
+  ::selection { background:var(--accent-line); }
+  html { -webkit-text-size-adjust:100%; }
+  body { margin:0; background:#fff; color:var(--text); font-family:Pretendard,-apple-system,"Apple SD Gothic Neo",sans-serif;
+    letter-spacing:-.3px; font-variant-numeric:tabular-nums; -webkit-tap-highlight-color:transparent; }
+  button { font:inherit; color:inherit; cursor:pointer; }
+  :focus-visible { outline:2px solid var(--accent); outline-offset:2px; border-radius:8px; }
+  main { max-width:480px; margin:0 auto; padding:28px 20px 48px; }
+
+  .pill { display:inline-flex; align-items:center; gap:6px; background:var(--accent-soft); color:var(--ink);
+    font-size:13px; font-weight:600; padding:6px 11px; border-radius:20px; }
+  .pill i { width:6px; height:6px; border-radius:50%; background:var(--accent); }
+  .date { font-size:15px; color:var(--sub); margin-top:16px; font-weight:500; }
+  .hello { font-size:28px; font-weight:700; margin:6px 0 26px; line-height:1.36; word-break:keep-all; overflow-wrap:anywhere; text-wrap:balance; }
+  .hello em { font-style:normal; background:linear-gradient(transparent 62%, var(--accent-line) 62%); }
+
+  .month { display:flex; align-items:center; justify-content:space-between; margin:0 0 6px; }
+  .month b { font-size:17px; font-weight:700; }
+  .month button { display:inline-flex; align-items:center; gap:2px; background:none; border:0; color:var(--ink);
+    font-size:14px; font-weight:600; padding:8px 4px; min-height:40px; }
+  .month button svg { width:16px; height:16px; }
+  .dows, .cal { display:grid; grid-template-columns:repeat(7, minmax(0,1fr)); }
+  .dows span { text-align:center; font-size:12px; color:var(--sub); font-weight:600; padding:6px 0; }
+  .dows span:nth-child(7) { color:var(--warn); }
+  .day { position:relative; min-height:64px; padding:4px 0 6px; border:0; background:none; text-align:center;
+    display:flex; flex-direction:column; align-items:stretch; gap:2px; border-top:1px solid var(--line); }
+  .day .n { align-self:center; width:26px; height:26px; line-height:26px; border-radius:50%; font-size:14px; font-weight:500; }
+  .day.sun .n { color:var(--warn); }
+  .day.other .n { color:var(--sub); font-weight:400; }
+  .day.today .n { color:var(--ink); font-weight:700; }
+  .day.sel .n { background:var(--text); color:#fff; font-weight:700; }
+  .band { height:15px; font-size:10px; line-height:15px; font-weight:600; color:var(--ink); background:var(--accent-soft);
+    white-space:nowrap; overflow:hidden; padding:0 3px; text-align:left; }
+  .band.l { margin-left:3px; border-top-left-radius:5px; border-bottom-left-radius:5px; }
+  .band.r { margin-right:3px; border-top-right-radius:5px; border-bottom-right-radius:5px; }
+  .band.mine { background:var(--ink); color:#fff; }
+  .band.cancel { background:var(--chip); color:var(--sub); text-decoration:line-through; }
+  .band.gap { background:none; }
+  .lst { margin:0 3px; height:15px; font-size:10px; line-height:15px; font-weight:600; border-radius:5px; padding:0 3px;
+    color:var(--list); background:var(--list-soft); white-space:nowrap; overflow:hidden; text-align:left; }
+  .lst.mine { background:var(--list); color:#fff; }
+  .more { font-size:10px; color:var(--sub); font-weight:600; }
+  .day.other .band, .day.other .lst { opacity:.45; }
+
+  section { margin-top:34px; }
+  .lbl { font-size:13px; color:var(--sub); font-weight:600; margin:0 0 10px; }
+  .rows { display:flex; flex-direction:column; gap:8px; }
+  .row { display:flex; align-items:center; gap:12px; width:100%; text-align:left; background:#fff; border:1px solid var(--line);
+    border-radius:14px; padding:13px 14px; min-height:60px; transition:background .15s; }
+  .row:active { background:var(--chip); }
+  .row .when { flex:none; width:52px; font-size:13px; font-weight:700; color:var(--ink); line-height:1.25; }
+  .row.listing .when { color:var(--list); }
+  .row .when small { display:block; font-size:11px; font-weight:600; color:var(--sub); }
+  .row .what { flex:1; min-width:0; }
+  .row .name { display:block; font-size:16px; font-weight:700; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .row .meta { display:block; font-size:13px; color:var(--sub); margin-top:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .tag { flex:none; font-size:12px; font-weight:700; border-radius:8px; padding:4px 8px; background:var(--chip); color:var(--body); }
+  .tag.mine { background:var(--text); color:#fff; }
+  .tag.warn { background:var(--warn-soft); color:var(--warn); }
+  .none { font-size:15px; color:var(--sub); background:var(--chip); border-radius:14px; padding:16px; }
+
+  .tools { display:flex; gap:8px; }
+  .tools button, .tools label { flex:1; display:flex; align-items:center; justify-content:center; min-height:46px; border-radius:12px;
+    background:var(--chip); border:0; font-size:14px; font-weight:600; color:var(--body); cursor:pointer; }
+  .tools input { position:absolute; width:1px; height:1px; opacity:0; pointer-events:none; }
+  .tools label:focus-within { outline:2px solid var(--accent); outline-offset:2px; }
+  #msg { font-size:13px; margin:10px 2px 0; min-height:1em; color:var(--sub); }
+  #msg.err { color:var(--warn); }
+  footer { margin-top:30px; font-size:12px; color:var(--sub); line-height:1.7; word-break:keep-all; }
+
+  dialog { border:0; padding:0; margin:auto auto 0; width:100%; max-width:480px; max-height:88vh; border-radius:22px 22px 0 0;
+    background:#fff; color:var(--text); box-shadow:0 -8px 30px rgb(25 31 40 / .12); }
+  dialog[open] { animation:up .28s cubic-bezier(.2,.8,.2,1); }
+  @keyframes up { from { transform:translateY(40px); opacity:.4; } }
+  @media (prefers-reduced-motion: reduce) { dialog[open] { animation:none; } }
+  dialog::backdrop { background:rgb(25 31 40 / .4); }
+  .sheet { padding:10px 22px calc(22px + env(safe-area-inset-bottom)); }
+  .grab { width:40px; height:4px; border-radius:2px; background:var(--line); margin:0 auto 18px; }
+  .sheet .kind { display:flex; gap:6px; flex-wrap:wrap; }
+  .sheet h3 { font-size:24px; font-weight:700; margin:10px 0 16px; word-break:keep-all; overflow-wrap:anywhere; }
+  .facts { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:8px; margin-bottom:12px; }
+  .facts div { border:1px solid var(--line); border-radius:14px; padding:11px 13px; min-width:0; }
+  .facts .wide { grid-column:1 / -1; }
+  .facts small { display:block; font-size:12px; color:var(--sub); font-weight:600; margin-bottom:2px; }
+  .facts span { font-size:15px; font-weight:600; word-break:keep-all; overflow-wrap:anywhere; }
+  .facts span em { font-style:normal; font-size:12px; color:var(--sub); font-weight:500; margin-left:4px; }
+  .changes { background:var(--warn-soft); color:var(--warn); border-radius:12px; padding:10px 13px; font-size:13px; line-height:1.6; margin:0 0 12px; list-style:none; }
+  .changes:empty { display:none; }
+  .mine-lbl { font-size:13px; color:var(--sub); font-weight:600; margin:20px 0 8px; }
+  .states { display:flex; gap:6px; padding:5px; background:var(--chip); border-radius:14px; }
+  .states button { flex:1; min-height:42px; border:0; border-radius:10px; background:none; font-size:15px; font-weight:600; color:var(--sub); }
+  .states button[aria-pressed="true"] { background:var(--text); color:#fff; }
+  .fields { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:10px; }
+  .fields label { font-size:12px; color:var(--sub); font-weight:600; border:1px solid var(--line); border-radius:14px; padding:9px 13px 7px; }
+  .fields label:focus-within { border-color:var(--accent); }
+  .fields input { display:block; width:100%; border:0; padding:2px 0 0; font:inherit; font-size:17px; font-weight:700; color:var(--text);
+    background:none; outline:none; caret-color:var(--accent); }
+  .fields input::placeholder { color:var(--sub); font-weight:500; }
+  .actions { display:flex; gap:8px; margin-top:18px; }
+  .actions button { flex:1; min-height:50px; border-radius:14px; border:0; font-size:16px; font-weight:700; }
+  .actions .ghost { flex:0 0 auto; padding:0 18px; background:var(--chip); color:var(--sub); }
+  .actions .primary { background:var(--ink); color:#fff; }
+</style>
+</head>
+<body>
+<main>
+  <div id="head"></div>
+
+  <div class="month">
+    <button id="prev" aria-label="이전 달"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3 5 8l5 5"/></svg><span id="prevLbl"></span></button>
+    <b id="title"></b>
+    <button id="next" aria-label="다음 달"><span id="nextLbl"></span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m6 3 5 5-5 5"/></svg></button>
+  </div>
+  <div class="dows" aria-hidden="true"></div>
+  <div class="cal" id="cal"></div>
+
+  <section id="daySec" hidden>
+    <p class="lbl" id="dayTitle"></p>
+    <div class="rows" id="dayList"></div>
+  </section>
+  <section>
+    <p class="lbl">이번 주 청약</p>
+    <div class="rows" id="weekSub"></div>
+  </section>
+  <section>
+    <p class="lbl">이번 주 상장</p>
+    <div class="rows" id="weekList"></div>
+  </section>
+  <section>
+    <p class="lbl">내 기록 백업</p>
+    <div class="tools">
+      <button id="export">파일로 내보내기</button>
+      <label>파일 불러오기<input type="file" id="import" accept=".json,application/json"></label>
+    </div>
+    <p id="msg" role="status"></p>
+  </section>
+  <footer id="foot"></footer>
+</main>
+
+<dialog id="sheet" aria-labelledby="dName">
+  <div class="sheet">
+    <div class="grab"></div>
+    <div class="kind" id="dKind"></div>
+    <h3 id="dName"></h3>
+    <ul class="changes" id="dChanges"></ul>
+    <div class="facts" id="dInfo"></div>
+    <p class="mine-lbl">내 기록</p>
+    <div class="states" id="dStates" role="group" aria-label="내 상태"></div>
+    <div class="fields">
+      <label>배정 수량(주)<input type="number" id="dShares" inputmode="numeric" step="1" min="0" placeholder="0"></label>
+      <label>매도 수익(원)<input type="number" id="dProfit" inputmode="numeric" step="1" placeholder="0"></label>
+    </div>
+    <div class="actions">
+      <button class="ghost" id="dClear">기록 지우기</button>
+      <button class="primary" id="dClose">닫기</button>
+    </div>
+  </div>
+</dialog>
+
+<script src="logic.js"></script>
+<script>
+const KEY = "ipo-records";
+const DOW = ["일","월","화","수","목","금","토"];
+const $ = id => document.getElementById(id);
+const won = n => n.toLocaleString("ko-KR") + "원";
+const md = iso => iso ? `${+iso.slice(5,7)}/${+iso.slice(8,10)}` : "미정";
+const mdKo = iso => `${+iso.slice(5,7)}월 ${+iso.slice(8,10)}일`;
+const dowOf = iso => new Date(iso + "T00:00:00Z").getUTCDay();
+const todayIso = () => new Date(Date.now() + 9 * 3600e3).toISOString().slice(0, 10); // KST
+const FIELD = {sub_start:"청약 시작", sub_end:"청약 마감", listing:"상장일", price_final:"확정공모가"};
+
+let ipos = [], records = {}, view, selected = null, current = null, loadFailed = false;
+
+function loadRecords() { try { records = parseRecords(localStorage.getItem(KEY) || "{}"); } catch { records = {}; } }
+function saveRecords() {
+  try { localStorage.setItem(KEY, JSON.stringify(records)); }
+  catch { say("브라우저에 저장하지 못했어요. 파일로 내보내 백업해 주세요.", true); }
+}
+function say(text, err) { $("msg").textContent = text; $("msg").className = err ? "err" : ""; }
+function el(tag, cls, text) {
+  const e = document.createElement(tag);
+  if (cls) e.className = cls;
+  if (text != null) e.textContent = text;
+  return e;
+}
+const names = list => list.length > 2 ? `${list[0].name}, ${list[1].name} 외 ${list.length - 2}개` : list.map(i => i.name).join(", ");
+
+function renderHead(today, w) {
+  const h = $("head");
+  h.replaceChildren();
+  const closing = ipos.filter(i => i.sub_end === today && i.status !== "cancel_suspect");
+  const open = w.sub.filter(i => i.sub_end >= today && i.status !== "cancel_suspect"); // 이미 끝난 청약은 문장에서 뺀다
+  const pill = el("span", "pill");
+  pill.append(el("i"), `이번 주 청약 ${w.sub.length} · 상장 ${w.listing.length}`);
+  const hello = el("div", "hello");
+  if (loadFailed) hello.append("일정을", el("br"), el("em", null, "불러오지 못했어요"));
+  else if (closing.length) hello.append("오늘 청약 마감은", el("br"), el("em", null, names(closing)));
+  else if (open.length) hello.append("이번 주 남은 청약은", el("br"), el("em", null, names(open)));
+  else hello.append("이번 주는", el("br"), el("em", null, "남은 청약이 없어요"));
+  h.append(pill, el("div", "date", `${mdKo(today)} ${DOW[dowOf(today)]}요일`), hello);
+}
+
+// 같은 날 여러 종목이 겹쳐도 띠가 줄을 바꾸지 않게, 청약 시작일 순으로 고정한다.
+function dayEvents(iso) {
+  const ev = eventsOn(ipos, iso);
+  const subs = ev.filter(e => e.kind === "sub").sort((a, b) => a.ipo.sub_start.localeCompare(b.ipo.sub_start) || a.ipo.no - b.ipo.no);
+  return {subs, lists: ev.filter(e => e.kind === "listing"), total: ev.length};
+}
+
+function renderCal(today) {
+  const [y, m] = view;
+  $("title").textContent = `${y}년 ${m}월`;
+  $("prevLbl").textContent = `${m === 1 ? 12 : m - 1}월`;
+  $("nextLbl").textContent = `${m === 12 ? 1 : m + 1}월`;
+  $("cal").replaceChildren(...monthGrid(y, m).map(iso => {
+    const c = el("button", "day");
+    const dow = dowOf(iso);
+    if (+iso.slice(5,7) !== m) c.classList.add("other");
+    if (dow === 0) c.classList.add("sun");
+    if (iso === today) c.classList.add("today");
+    if (iso === selected) c.classList.add("sel");
+    c.append(el("span", "n", +iso.slice(8,10)));
+    const {subs, lists, total} = dayEvents(iso);
+    let shown = 0;
+    for (const {ipo} of subs.slice(0, 2)) {
+      const start = iso === ipo.sub_start || dow === 1, end = iso === ipo.sub_end || dow === 5;
+      const b = el("span", "band" + (start ? " l" : "") + (end ? " r" : ""), ipo.name);
+      if (records[ipo.no]) b.classList.add("mine");
+      if (ipo.status === "cancel_suspect") b.classList.add("cancel");
+      c.append(b); shown++;
+    }
+    for (const {ipo} of lists.slice(0, Math.max(0, 3 - shown))) {
+      const b = el("span", "lst", ipo.name);
+      if (records[ipo.no]) b.classList.add("mine");
+      c.append(b); shown++;
+    }
+    if (total > shown) c.append(el("span", "more", `+${total - shown}`));
+    c.setAttribute("aria-label", `${mdKo(iso)}, 청약 ${subs.length}개, 상장 ${lists.length}개`);
+    c.onclick = () => { selected = selected === iso ? null : iso; render(); };
+    return c;
+  }));
+}
+
+function tagsOf(ipo) {
+  const out = [];
+  const r = records[ipo.no];
+  if (r) out.push(el("span", "tag mine", STATE_LABEL[r.state]));
+  if (ipo.status === "cancel_suspect") out.push(el("span", "tag warn", "취소?"));
+  else if (ipo.changes && ipo.changes.length) out.push(el("span", "tag warn", "정정"));
+  return out;
+}
+
+function row(ipo, kind) {
+  const b = el("button", "row" + (kind === "listing" ? " listing" : ""));
+  const when = el("span", "when");
+  if (kind === "sub") when.append(`${md(ipo.sub_start)}`, el("small", null, `~${md(ipo.sub_end)}`));
+  else when.append(md(ipo.listing), el("small", null, "상장"));
+  const a = minAmount(ipo);
+  const what = el("span", "what");
+  what.append(el("span", "name", ipo.name),
+    el("span", "meta", [ipo.brokers.join(", ") || "증권사 미정", a.amount == null ? null : `최소 ${won(a.amount)}`].filter(Boolean).join(" · ")));
+  b.append(when, what, ...tagsOf(ipo));
+  b.onclick = () => openSheet(ipo);
+  return b;
+}
+
+function fill(box, rows, empty) {
+  box.replaceChildren(...(rows.length ? rows : [el("p", "none", loadFailed ? "일정을 불러오지 못했어요" : empty)]));
+}
+
+function render() {
+  const today = todayIso();
+  const w = weekItems(ipos, today);
+  renderHead(today, w);
+  renderCal(today);
+  $("daySec").hidden = !selected;
+  if (selected) {
+    $("dayTitle").textContent = `${mdKo(selected)} ${DOW[dowOf(selected)]}요일`;
+    const {subs, lists} = dayEvents(selected);
+    fill($("dayList"), [...subs.map(e => row(e.ipo, "sub")), ...lists.map(e => row(e.ipo, "listing"))], "이날은 일정이 없어요");
+  }
+  fill($("weekSub"), w.sub.map(i => row(i, "sub")), "이번 주 청약은 없어요");
+  fill($("weekList"), w.listing.map(i => row(i, "listing")), "이번 주 상장은 없어요");
+}
+
+function openSheet(ipo) {
+  current = ipo;
+  const kind = [el("span", "pill", ipo.progress === "신규상장" ? "상장 완료" : "공모주")];
+  if (ipo.status === "cancel_suspect") kind.push(el("span", "tag warn", "취소?"));
+  $("dKind").replaceChildren(...kind);
+  $("dName").textContent = ipo.name;
+  const ch = (ipo.changes || []).slice(-5).map(c => {
+    const v = x => x == null ? "미정" : c.field === "price_final" ? won(x) : md(x);
+    return el("li", null, `${FIELD[c.field]} ${v(c.old)} → ${v(c.new)}`);
+  });
+  if (ipo.status === "cancel_suspect") ch.unshift(el("li", null, "목록에서 사라졌어요. 청약 취소나 연기일 수 있어요."));
+  $("dChanges").replaceChildren(...ch);
+
+  const a = minAmount(ipo);
+  const price = ipo.price_final ? [won(ipo.price_final), "확정"]
+    : ipo.price_band ? [`${ipo.price_band[0].toLocaleString("ko-KR")}~${won(ipo.price_band[1])}`, "희망"] : ["미정", ""];
+  const fact = (label, value, note, wide) => {
+    const d = el("div", wide ? "wide" : null);
+    const s = el("span", null, value);
+    if (note) s.append(el("em", null, note));
+    d.append(el("small", null, label), s);
+    return d;
+  };
+  $("dInfo").replaceChildren(
+    fact("청약", `${md(ipo.sub_start)} ~ ${md(ipo.sub_end)}`),
+    fact("상장", md(ipo.listing)),
+    fact("증권사", ipo.brokers.join(", ") || "미정", null, true),
+    fact("공모가", price[0], price[1], true),
+    fact("최소 청약금액", a.amount == null ? "미정" : won(a.amount),
+      `${a.shares}주 기준${a.estimated ? " · 예상" : ""} · 증거금 ${ipo.margin_rate * 100}%`, true),
+  );
+  const r = records[ipo.no] || {};
+  $("dStates").replaceChildren(...RECORD_STATES.map(s => {
+    const b = el("button", null, STATE_LABEL[s]);
+    b.setAttribute("aria-pressed", r.state === s);
+    b.onclick = () => { update({state: s}); openSheet(ipo); };
+    return b;
+  }));
+  $("dShares").value = r.shares ?? "";
+  $("dProfit").value = r.profit ?? "";
+  if (!$("sheet").open) $("sheet").showModal();
+}
+
+function update(patch) {
+  records[current.no] = {state: "subscribed", shares: null, profit: null, ...records[current.no], ...patch};
+  saveRecords();
+  render();
+}
+
+for (const [id, field] of [["dShares", "shares"], ["dProfit", "profit"]]) {
+  $(id).onchange = () => {
+    const v = $(id).value.trim();
+    if (v === "" && $(id).validity.badInput) return; // 잘못된 글자는 기존 값을 지우지 않는다
+    const n = v === "" ? null : Math.trunc(Number(v));
+    if (v !== "" && (!Number.isFinite(n) || (field === "shares" && n < 0))) { // 배정 수량은 0 이상
+      $(id).value = records[current.no]?.[field] ?? "";
+      return;
+    }
+    update({[field]: n});
+  };
+}
+$("dClose").onclick = () => $("sheet").close();
+$("dClear").onclick = () => { delete records[current.no]; saveRecords(); render(); openSheet(current); };
+$("sheet").addEventListener("click", e => { if (e.target === $("sheet")) $("sheet").close(); });
+
+$("prev").onclick = () => { view = view[1] === 1 ? [view[0] - 1, 12] : [view[0], view[1] - 1]; selected = null; render(); };
+$("next").onclick = () => { view = view[1] === 12 ? [view[0] + 1, 1] : [view[0], view[1] + 1]; selected = null; render(); };
+
+$("export").onclick = () => {
+  const a = el("a");
+  a.href = URL.createObjectURL(new Blob([JSON.stringify(records, null, 1)], {type: "application/json"}));
+  a.download = `ipo-records-${todayIso()}.json`;
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  say(`기록 ${Object.keys(records).length}건을 내보냈어요.`);
+};
+$("import").onchange = async e => {
+  const file = e.target.files[0];
+  e.target.value = "";
+  if (!file) return;
+  try {
+    records = parseRecords(await file.text());
+    saveRecords();
+    render();
+    say(`기록 ${Object.keys(records).length}건을 불러왔어요.`);
+  } catch (err) {
+    say(`불러오지 못했어요: ${err.message}. 기존 기록은 그대로예요.`, true);
+  }
+};
+
+document.querySelector(".dows").replaceChildren(..."월화수목금토일".split("").map(d => el("span", null, d)));
+const t = todayIso();
+view = [+t.slice(0, 4), +t.slice(5, 7)];
+loadRecords();
+fetch("data/ipos.json", {cache: "no-cache"})
+  .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+  .then(d => {
+    ipos = Object.values(d.ipos);
+    const up = new Date(d.updated);
+    $("foot").replaceChildren(
+      "일정은 38커뮤니케이션에서 하루 세 번 가져와요. 청약 전에 증권사 공고를 꼭 확인하세요.", el("br"),
+      `최소 청약금액은 10주 기준 예상치예요 · 마지막 변경 ${up.toLocaleString("ko-KR", {timeZone: "Asia/Seoul", month: "long", day: "numeric", hour: "2-digit", minute: "2-digit"})}`);
+    render();
+  })
+  .catch(() => { loadFailed = true; render(); say("일정 파일을 읽지 못했어요. 잠시 뒤 다시 열어 주세요.", true); });
+</script>
+</body>
+</html>
