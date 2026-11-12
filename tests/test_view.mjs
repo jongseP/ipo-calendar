@@ -39,4 +39,7 @@ assert.deepEqual(parseRecords('{"1":{"state":"sold","shares":2,"profit":15000}}'
 assert.deepEqual(parseRecords('{"7":{"state":"subscribed","shares":null,"profit":-3000}}'), {"7":{state:"subscribed",shares:null,profit:-3000}});
 assert.throws(() => parseRecords('{"1":{"state":"holding","shares":-3,"profit":null}}'));  // 배정 수량은 0 이상
 assert.throws(() => parseRecords("not json"), /JSON 파일이 아닙니다/);                   // 한국어 안내
+assert.equal(isPick({inst_rate:800}), true);
+assert.equal(isPick({inst_rate:799.9}), false);
+assert.equal(isPick({inst_rate:null}), false);
 console.log("ok");

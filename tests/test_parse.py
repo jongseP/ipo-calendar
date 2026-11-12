@@ -20,10 +20,12 @@ assert d["price_final"] == 17600, d
 assert d["brokers"] == ["대신증권"], d
 assert d["min_shares"] is None and d["margin_rate"] == 0.5, d
 assert d["progress"] == "공모주", d
+assert (d["inst_rate"], d["lockup_pct"], d["retail_rate"]) == (871.74, 1.13, 834.73), d
 
 d = parse_detail(read("detail_2355.html"), 2355)
 assert d["name"] == "KTE" and d["listing"] is None and d["price_final"] is None, d
 assert d["price_band"] == [19000, 23000] and d["brokers"] == ["NH투자증권"], d
+assert (d["inst_rate"], d["lockup_pct"], d["retail_rate"]) == (None, None, None), d  # 수요예측 전
 
 rows = parse_list(read("list.html"))
 kte = next(r for r in rows if r["no"] == 2355)

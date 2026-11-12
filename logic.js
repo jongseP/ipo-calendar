@@ -1,6 +1,8 @@
 // 화면 규칙(순수 함수). index.html과 tests/test_view.mjs가 같이 쓴다.
 // 날짜는 "YYYY-MM-DD" 문자열. 시간대 문제를 피하려고 계산은 UTC 기준으로 한다.
 const DEFAULT_MIN_SHARES = 10; // 38커뮤니케이션에 최저 청약 주식 수가 비어 있어 쓰는 기본값(미검증)
+const PICK_INST_RATE = 800; // 기관경쟁률이 이 값 이상이면 추천(사용자 기준)
+const isPick = ipo => (ipo.inst_rate ?? 0) >= PICK_INST_RATE;
 const RECORD_STATES = ["subscribed", "holding", "sold"];
 const STATE_LABEL = {subscribed: "청약함", holding: "보유 중", sold: "매도함"};
 

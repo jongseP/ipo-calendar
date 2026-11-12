@@ -72,6 +72,7 @@
   .row .meta { display:block; font-size:13px; color:var(--sub); margin-top:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
   .tag { flex:none; font-size:12px; font-weight:700; border-radius:8px; padding:4px 8px; background:var(--chip); color:var(--body); }
   .tag.mine { background:var(--text); color:#fff; }
+  .tag.pick { background:var(--accent-soft); color:var(--ink); }
   .tag.warn { background:var(--warn-soft); color:var(--warn); }
   .none { font-size:15px; color:var(--sub); background:var(--chip); border-radius:14px; padding:16px; }
 
@@ -179,6 +180,7 @@ const KEY = "ipo-records";
 const DOW = ["일","월","화","수","목","금","토"];
 const $ = id => document.getElementById(id);
 const won = n => n.toLocaleString("ko-KR") + "원";
+const rate = n => Math.round(n).toLocaleString("ko-KR") + ":1";
 const md = iso => iso ? `${+iso.slice(5,7)}/${+iso.slice(8,10)}` : "미정";
 const mdKo = iso => `${+iso.slice(5,7)}월 ${+iso.slice(8,10)}일`;
 const dowOf = iso => new Date(iso + "T00:00:00Z").getUTCDay();
@@ -261,6 +263,7 @@ function tagsOf(ipo) {
   const out = [];
   const r = records[ipo.no];
   if (r) out.push(el("span", "tag mine", STATE_LABEL[r.state]));
+  if (isPick(ipo)) out.push(el("span", "tag pick", "추천"));
   if (ipo.status === "cancel_suspect") out.push(el("span", "tag warn", "취소?"));
   else if (ipo.changes && ipo.changes.length) out.push(el("span", "tag warn", "정정"));
   return out;
@@ -275,6 +278,7 @@ function row(ipo, kind) {
   const what = el("span", "what");
   what.append(el("span", "name", ipo.name),
     el("span", "meta", [ipo.brokers.join(", ") || "증권사 미정", a.amount == null ? null : `최소 ${won(a.amount)}`].filter(Boolean).join(" · ")));
+  if (ipo.inst_rate != null) what.append(el("span", "meta", `기관 ${rate(ipo.inst_rate)} · 확약 ${ipo.lockup_pct ?? "-"}%`));
   b.append(when, what, ...tagsOf(ipo));
   b.onclick = () => openSheet(ipo);
   return b;
@@ -302,6 +306,7 @@ function render() {
 function openSheet(ipo) {
   current = ipo;
   const kind = [el("span", "pill", ipo.progress === "신규상장" ? "상장 완료" : "공모주")];
+  if (isPick(ipo)) kind.push(el("span", "tag pick", "추천 · 기관 800:1 이상"));
   if (ipo.status === "cancel_suspect") kind.push(el("span", "tag warn", "취소?"));
   $("dKind").replaceChildren(...kind);
   $("dName").textContent = ipo.name;
@@ -329,6 +334,9 @@ function openSheet(ipo) {
     fact("공모가", price[0], price[1], true),
     fact("최소 청약금액", a.amount == null ? "미정" : won(a.amount),
       `${a.shares}주 기준${a.estimated ? " · 예상" : ""} · 증거금 ${ipo.margin_rate * 100}%`, true),
+    fact("기관 경쟁률", ipo.inst_rate == null ? "수요예측 전" : rate(ipo.inst_rate)),
+    fact("의무보유 확약", ipo.lockup_pct == null ? "-" : `${ipo.lockup_pct}%`),
+    fact("일반 청약 경쟁률", ipo.retail_rate == null ? "청약 전" : rate(ipo.retail_rate)),
   );
   const r = records[ipo.no] || {};
   $("dStates").replaceChildren(...RECORD_STATES.map(s => {

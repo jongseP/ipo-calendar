@@ -79,6 +79,10 @@ def parse_detail(html, no):
     band = get(r"희망공모가액\|([\d,]+) ~ ([\d,]+)")
     least = get(r"최저 : ([\d,]+) 주")
     rates = re.findall(r"청약증거금율 : (\d+)%", t)
+    inst = get(r"기관경쟁률\|([\d,.]+):1")
+    lock = get(r"의무보유확약\|([\d.]+)%")
+    retail = get(r"청약경쟁률\|([\d,.]+):1")
+    fl = lambda v: float(v[0].replace(",", "")) if v else None  # noqa: E731
     return {
         "no": no,
         "name": get(r"종목명\|([^|]+)")[0],
@@ -91,6 +95,9 @@ def parse_detail(html, no):
         "min_shares": _num(least[0]) if least else None,
         "margin_rate": int(rates[1]) / 100 if len(rates) > 1 else 0.5,
         "progress": val("진행상황"),
+        "inst_rate": fl(inst),
+        "lockup_pct": fl(lock) if inst else None,  # 수요예측 전에는 0.00%로 나와서 비운다
+        "retail_rate": fl(retail),
     }
 
 
