@@ -136,11 +136,11 @@
     <div class="rows" id="dayList"></div>
   </section>
   <section>
-    <p class="lbl">이번 주 청약</p>
+    <p class="lbl" id="weekSubLbl">이번 주 청약</p>
     <div class="rows" id="weekSub"></div>
   </section>
   <section>
-    <p class="lbl">이번 주 상장</p>
+    <p class="lbl" id="weekListLbl">이번 주 상장</p>
     <div class="rows" id="weekList"></div>
   </section>
   <section>
@@ -209,12 +209,12 @@ function renderHead(today, w) {
   const closing = ipos.filter(i => i.sub_end === today && i.status !== "cancel_suspect");
   const open = w.sub.filter(i => i.sub_end >= today && i.status !== "cancel_suspect"); // 이미 끝난 청약은 문장에서 뺀다
   const pill = el("span", "pill");
-  pill.append(el("i"), `이번 주 청약 ${w.sub.length} · 상장 ${w.listing.length}`);
+  pill.append(el("i"), `${wk} 청약 ${w.sub.length} · 상장 ${w.listing.length}`);
   const hello = el("div", "hello");
   if (loadFailed) hello.append("일정을", el("br"), el("em", null, "불러오지 못했어요"));
   else if (closing.length) hello.append("오늘 청약 마감은", el("br"), el("em", null, names(closing)));
-  else if (open.length) hello.append("이번 주 남은 청약은", el("br"), el("em", null, names(open)));
-  else hello.append("이번 주는", el("br"), el("em", null, "남은 청약이 없어요"));
+  else if (open.length) hello.append(`${wk} 남은 청약은`, el("br"), el("em", null, names(open)));
+  else hello.append(`${wk}는`, el("br"), el("em", null, "남은 청약이 없어요"));
   h.append(pill, el("div", "date", `${mdKo(today)} ${DOW[dowOf(today)]}요일`), hello);
 }
 
@@ -241,7 +241,7 @@ function renderCal(today) {
     const {subs, lists, total} = dayEvents(iso);
     let shown = 0;
     for (const {ipo} of subs.slice(0, 2)) {
-      const start = iso === ipo.sub_start || dow === 1, end = iso === ipo.sub_end || dow === 5;
+      const start = iso === ipo.sub_start || dow === 1 || !isBizDay(isoAdd(iso, -1)), end = iso === ipo.sub_end || dow === 5 || !isBizDay(isoAdd(iso, 1));
       const b = el("span", "band" + (start ? " l" : "") + (end ? " r" : ""), ipo.name);
       if (records[ipo.no]) b.classList.add("mine");
       if (ipo.status === "cancel_suspect") b.classList.add("cancel");
@@ -288,9 +288,13 @@ function fill(box, rows, empty) {
   box.replaceChildren(...(rows.length ? rows : [el("p", "none", loadFailed ? "일정을 불러오지 못했어요" : empty)]));
 }
 
+let wk = "이번 주"; // 일요일엔 다음 주를 보여 주므로 이름도 바꾼다
 function render() {
   const today = todayIso();
   const w = weekItems(ipos, today);
+  wk = dowOf(today) === 0 ? "다음 주" : "이번 주";
+  $("weekSubLbl").textContent = `${wk} 청약`;
+  $("weekListLbl").textContent = `${wk} 상장`;
   renderHead(today, w);
   renderCal(today);
   $("daySec").hidden = !selected;
@@ -299,8 +303,8 @@ function render() {
     const {subs, lists} = dayEvents(selected);
     fill($("dayList"), [...subs.map(e => row(e.ipo, "sub")), ...lists.map(e => row(e.ipo, "listing"))], "이날은 일정이 없어요");
   }
-  fill($("weekSub"), w.sub.map(i => row(i, "sub")), "이번 주 청약은 없어요");
-  fill($("weekList"), w.listing.map(i => row(i, "listing")), "이번 주 상장은 없어요");
+  fill($("weekSub"), w.sub.map(i => row(i, "sub")), `${wk} 청약은 없어요`);
+  fill($("weekList"), w.listing.map(i => row(i, "listing")), `${wk} 상장은 없어요`);
 }
 
 function openSheet(ipo) {
@@ -333,10 +337,11 @@ function openSheet(ipo) {
     fact("증권사", ipo.brokers.join(", ") || "미정", null, true),
     fact("공모가", price[0], price[1], true),
     fact("최소 청약금액", a.amount == null ? "미정" : won(a.amount),
-      `${a.shares}주 기준${a.estimated ? " · 예상" : ""} · 증거금 ${ipo.margin_rate * 100}%`, true),
+      `${a.shares}주 기준${ipo.min_shares == null ? "(보통 수량, 증권사 공지 확인)" : ""}${a.estimated ? " · 예상" : ""} · 증거금 ${ipo.margin_rate * 100}%`, true),
     fact("기관 경쟁률", ipo.inst_rate == null ? "수요예측 전" : rate(ipo.inst_rate)),
     fact("의무보유 확약", ipo.lockup_pct == null ? "-" : `${ipo.lockup_pct}%`),
     fact("일반 청약 경쟁률", ipo.retail_rate == null ? "청약 전" : rate(ipo.retail_rate)),
+    fact("유통가능 물량", ipo.float_pct == null ? "-" : `${ipo.float_pct}%`, "상장일 기준"),
   );
   const r = records[ipo.no] || {};
   $("dStates").replaceChildren(...RECORD_STATES.map(s => {

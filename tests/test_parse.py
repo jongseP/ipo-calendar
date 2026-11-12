@@ -27,6 +27,11 @@ assert d["name"] == "KTE" and d["listing"] is None and d["price_final"] is None,
 assert d["price_band"] == [19000, 23000] and d["brokers"] == ["NH투자증권"], d
 assert (d["inst_rate"], d["lockup_pct"], d["retail_rate"]) == (None, None, None), d  # 수요예측 전
 
+# 유통가능물량: 머리글 순서가 '유통가능|매각제한'(2331)과 '매각제한|유통가능'(2358) 둘 다 맞게 읽는다
+assert parse_detail(read("detail_2331.html"), 2331)["float_pct"] == 35.01
+assert parse_detail(read("detail_2358.html"), 2358)["float_pct"] == 38.88
+assert d["float_pct"] is None  # 표가 없는 종목(2355)
+
 rows = parse_list(read("list.html"))
 kte = next(r for r in rows if r["no"] == 2355)
 assert (kte["name"], kte["sub_start"], kte["sub_end"]) == ("KTE", "2026-12-14", "2026-12-15"), kte

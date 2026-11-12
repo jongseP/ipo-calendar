@@ -29,6 +29,18 @@ assert.deepEqual(weekItems([K], "2026-12-09").listing.map(i => i.no), [1]);
 const L = {...K, no:2, sub_start:"2026-11-23", sub_end:"2026-11-24"};
 assert.deepEqual(weekItems([K, L], "2026-11-25").sub.map(i => i.no), [2, 1]);  // 날짜순
 
+// 공휴일: 추석(2027-09-14~16)에 걸친 청약은 그날 띠를 그리지 않는다
+const C = {...K, no:3, sub_start:"2027-09-13", sub_end:"2027-09-17", listing:null};
+assert.equal(eventsOn([C], "2027-09-13").length, 1);
+assert.equal(eventsOn([C], "2027-09-15").length, 0);
+assert.equal(eventsOn([C], "2027-09-17").length, 1);
+assert.equal(isBizDay("2026-12-25"), false);
+assert.equal(isBizDay("2026-12-24"), true);
+// 일요일엔 "이번 주"가 다음 주(월~일)
+assert.deepEqual(weekItems([K], "2026-11-29").sub.map(i => i.no), [1]);   // 11/29(일) → 11/30 주
+assert.deepEqual(weekItems([L], "2026-11-29").sub.map(i => i.no), []);    // 지난 주(11/23~24) 청약은 빠짐
+assert.deepEqual(weekItems([L], "2026-11-28").sub.map(i => i.no), [2]);   // 토요일은 그대로 그 주
+
 assert.deepEqual(RECORD_STATES, ["subscribed", "holding", "sold"]);
 assert.throws(() => parseRecords('{"1":{"state":"bought"}}'));
 assert.throws(() => parseRecords("not json"));

@@ -98,7 +98,27 @@ def parse_detail(html, no):
         "inst_rate": fl(inst),
         "lockup_pct": fl(lock) if inst else None,  # 수요예측 전에는 0.00%로 나와서 비운다
         "retail_rate": fl(retail),
+        "float_pct": float_pct(t),
     }
+
+
+def float_pct(t):
+    """'4.공모후 유통가능 물량' 표의 합계(총계) 줄에서 유통가능 지분율(%)을 읽는다.
+    합계 줄은 공모전 주식수·지분율, 공모후 주식수·지분율, 그다음 두 쌍이 유통가능/매각제한인데
+    두 쌍의 순서가 회사마다 달라서, 머리글에서 어느 쪽이 먼저 나오는지로 가린다."""
+    i = t.find("4.공모후 유통가능")
+    if i < 0:
+        return None
+    end = re.search(r"\|5\.\D", t[i:])  # 다음 절 제목('|5.요약재무제표'). '|5.30%' 같은 숫자와 구분
+    sec = t[i:i + end.start()] if end else t[i:]
+    m = re.search(r"\|(?:합계|총계)\|([\d,]+)\|[\d.]+%\|([\d,]+)\|[\d.]+%\|([\d,]+)\|([\d.]+)%\|([\d,]+)\|([\d.]+)%", sec)
+    free, locked = sec.find("유통가능물량"), sec.find("매각제한물량")  # 머리글 칸 이름(제목은 '유통가능 물량'으로 띄어 씀)
+    if not m or free < 0 or locked < 0:
+        return None
+    post, a, b = _num(m[2]), _num(m[3]), _num(m[5])
+    if a + b != post:  # 칸을 잘못 읽었으면 비운다
+        return None
+    return float(m[4] if free < locked else m[6])
 
 
 def merge(old, fresh, listed, today, now):
