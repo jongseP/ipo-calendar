@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-13T11:19:57+09:00",
+ "updated": "2026-11-13T19:26:29+09:00",
  "ipos": {
   "2355": {
    "no": 2355,
@@ -246,8 +246,8 @@
   "2341": {
    "no": 2341,
    "name": "제논",
-   "sub_start": "2026-11-24",
-   "sub_end": "2026-11-25",
+   "sub_start": "2026-12-14",
+   "sub_end": "2026-12-15",
    "listing": null,
    "price_final": null,
    "price_band": [
@@ -265,7 +265,20 @@
    "retail_rate": null,
    "float_pct": 29.07,
    "status": "active",
-   "changes": []
+   "changes": [
+    {
+     "at": "2026-11-13T19:26:29+09:00",
+     "field": "sub_start",
+     "old": "2026-11-24",
+     "new": "2026-12-14"
+    },
+    {
+     "at": "2026-11-13T19:26:29+09:00",
+     "field": "sub_end",
+     "old": "2026-11-25",
+     "new": "2026-12-15"
+    }
+   ]
   },
   "2340": {
    "no": 2340,
@@ -410,7 +423,7 @@
    "progress": "공모주",
    "inst_rate": null,
    "lockup_pct": null,
-   "retail_rate": null,
+   "retail_rate": 172.0,
    "float_pct": 34.01,
    "status": "active",
    "changes": []
