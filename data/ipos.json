@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-13T02:35:30+09:00",
+ "updated": "2026-11-13T11:19:57+09:00",
  "ipos": {
   "2355": {
    "no": 2355,
@@ -724,6 +724,31 @@
    "lockup_pct": 29.52,
    "retail_rate": 1253.39,
    "float_pct": 31.29,
+   "status": "active",
+   "changes": []
+  },
+  "2360": {
+   "no": 2360,
+   "name": "태석광학",
+   "sub_start": "2026-12-14",
+   "sub_end": "2026-12-15",
+   "listing": null,
+   "price_final": null,
+   "price_band": [
+    17500,
+    20200
+   ],
+   "brokers": [
+    "신한투자증권",
+    "대신증권"
+   ],
+   "min_shares": null,
+   "margin_rate": 0.5,
+   "progress": "공모주",
+   "inst_rate": null,
+   "lockup_pct": null,
+   "retail_rate": null,
+   "float_pct": null,
    "status": "active",
    "changes": []
   }
