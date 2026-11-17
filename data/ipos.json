@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-16T10:31:36+09:00",
+ "updated": "2026-11-17T13:18:02+09:00",
  "ipos": {
   "2355": {
    "no": 2355,
@@ -28,8 +28,8 @@
   "2356": {
    "no": 2356,
    "name": "데스틴파워",
-   "sub_start": "2026-12-14",
-   "sub_end": "2026-12-15",
+   "sub_start": "2026-12-11",
+   "sub_end": "2026-12-14",
    "listing": null,
    "price_final": null,
    "price_band": [
@@ -47,7 +47,20 @@
    "retail_rate": null,
    "float_pct": null,
    "status": "active",
-   "changes": []
+   "changes": [
+    {
+     "at": "2026-11-17T13:18:02+09:00",
+     "field": "sub_start",
+     "old": "2026-12-14",
+     "new": "2026-12-11"
+    },
+    {
+     "at": "2026-11-17T13:18:02+09:00",
+     "field": "sub_end",
+     "old": "2026-12-15",
+     "new": "2026-12-14"
+    }
+   ]
   },
   "2348": {
    "no": 2348,
@@ -492,7 +505,7 @@
    ],
    "min_shares": null,
    "margin_rate": 0.5,
-   "progress": "공모주",
+   "progress": "신규상장",
    "inst_rate": 1201.81,
    "lockup_pct": 5.62,
    "retail_rate": 1343.32,
