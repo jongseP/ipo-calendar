@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-17T13:18:02+09:00",
+ "updated": "2026-11-18T03:04:26+09:00",
  "ipos": {
   "2355": {
    "no": 2355,
@@ -389,7 +389,7 @@
    "lockup_pct": null,
    "retail_rate": null,
    "float_pct": null,
-   "status": "active",
+   "status": "cancel_suspect",
    "changes": []
   },
   "2352": {
@@ -398,7 +398,7 @@
    "sub_start": "2026-11-18",
    "sub_end": "2026-11-19",
    "listing": "2026-11-30",
-   "price_final": null,
+   "price_final": 19000,
    "price_band": [
     19000,
     23000
@@ -410,8 +410,8 @@
    "min_shares": null,
    "margin_rate": 0.5,
    "progress": "공모주",
-   "inst_rate": null,
-   "lockup_pct": null,
+   "inst_rate": 173.42,
+   "lockup_pct": 0.57,
    "retail_rate": null,
    "float_pct": 36.81,
    "status": "active",
@@ -767,6 +767,30 @@
    "brokers": [
     "신한투자증권",
     "대신증권"
+   ],
+   "min_shares": null,
+   "margin_rate": 0.5,
+   "progress": "공모주",
+   "inst_rate": null,
+   "lockup_pct": null,
+   "retail_rate": null,
+   "float_pct": null,
+   "status": "active",
+   "changes": []
+  },
+  "2361": {
+   "no": 2361,
+   "name": "이나인페이",
+   "sub_start": "2026-12-16",
+   "sub_end": "2026-12-17",
+   "listing": null,
+   "price_final": null,
+   "price_band": [
+    7500,
+    10500
+   ],
+   "brokers": [
+    "한국투자증권"
    ],
    "min_shares": null,
    "margin_rate": 0.5,
