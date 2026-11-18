@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-18T12:16:44+09:00",
+ "updated": "2026-11-19T02:44:30+09:00",
  "ipos": {
   "2355": {
    "no": 2355,
@@ -252,7 +252,7 @@
    "inst_rate": null,
    "lockup_pct": null,
    "retail_rate": null,
-   "float_pct": null,
+   "float_pct": 29.49,
    "status": "active",
    "changes": []
   },
