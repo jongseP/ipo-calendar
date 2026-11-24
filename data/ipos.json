@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-23T20:39:33+09:00",
+ "updated": "2026-11-24T14:42:41+09:00",
  "ipos": {
   "2355": {
    "no": 2355,
@@ -433,7 +433,7 @@
    ],
    "min_shares": null,
    "margin_rate": 0.5,
-   "progress": "공모주",
+   "progress": "신규상장",
    "inst_rate": null,
    "lockup_pct": null,
    "retail_rate": 172.0,
