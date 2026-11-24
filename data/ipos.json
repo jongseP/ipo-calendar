@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-24T14:42:41+09:00",
+ "updated": "2026-11-25T04:51:51+09:00",
  "ipos": {
   "2355": {
    "no": 2355,
@@ -82,7 +82,7 @@
    "inst_rate": null,
    "lockup_pct": null,
    "retail_rate": null,
-   "float_pct": null,
+   "float_pct": 37.71,
    "status": "active",
    "changes": []
   },
@@ -228,7 +228,7 @@
    "inst_rate": null,
    "lockup_pct": null,
    "retail_rate": null,
-   "float_pct": null,
+   "float_pct": 37.95,
    "status": "active",
    "changes": []
   },
@@ -322,7 +322,7 @@
    "name": "신영스팩12호",
    "sub_start": "2026-11-24",
    "sub_end": "2026-11-25",
-   "listing": null,
+   "listing": "2026-12-03",
    "price_final": 2000,
    "price_band": [
     2000,
